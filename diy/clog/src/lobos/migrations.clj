@@ -20,18 +20,37 @@
 
 ;;; Defines the database for lobos migrations
 
-(def db-uri (java.net.URI. (System/getenv "DATABASE_URL"))) 
+;; (def db-uri (java.net.URI. (System/getenv "DATABASE_URL"))) 
 
-(def user-and-password (string/split (.getUserInfo db-uri) #":")) 
+;; (def user-and-password (string/split (.getUserInfo db-uri) #":")) 
 
-(def clogdb {:classname "org.postgresql.Driver" 
-         :subprotocol "postgresql" 
-         :user (get user-and-password 0) 
-         :password (get user-and-password 1) ; may be nil 
-         :subname (if (= -1 (.getPort db-uri)) 
-                    (format "//%s%s" (.getHost db-uri) (.getPath db-uri)) 
-                    (format "//%s:%s%s" (.getHost db-uri) (.getPort 
-db-uri) (.getPath db-uri)))})
+;; (def clogdb {:classname "org.postgresql.Driver" 
+;;          :subprotocol "postgresql" 
+;;          :user (get user-and-password 0) 
+;;          :password (get user-and-password 1) ; may be nil 
+;;          :subname (if (= -1 (.getPort db-uri)) 
+;;                     (format "//%s%s" (.getHost db-uri) (.getPath db-uri)) 
+;;                     (format "//%s:%s%s" (.getHost db-uri) (.getPort 
+;; db-uri) (.getPath db-uri)))})
+(defn cloud-db
+  "Generate the db map according to cloud environment when available."
+  []
+  (when (System/getenv "DATABASE_URL")
+    (let [url (URI. (System/getenv "DATABASE_URL"))
+          host (.getHost url)
+          port (if (pos? (.getPort url)) (.getPort url) 5432)
+          path (.getPath url)]
+      (merge
+       {:subname (str "//" host ":" port path)}
+       (when-let [user-info (.getUserInfo url)]
+         {:user (first (str/split user-info #":"))
+          :password (second (str/split user-info #":"))})))))
+
+(def clogdb
+  (merge {:classname "org.postgresql.Driver"
+          :subprotocol "postgresql"
+          :subname "//localhost:5432/px"}
+         (cloud-db)))
 
 ;; (def clogdb
 ;;      {:classname "org.postgresql.Driver"
