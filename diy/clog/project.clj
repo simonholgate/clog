@@ -6,6 +6,10 @@ Use: export DATABASE_URL=postgresql://localhost:5432/clogdb"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :min-lein-version "2.0.0"
   :main clog.core
+  :repl-options {
+                 :port (System/getenv "OPENSHIFT_INTERNAL_PORT")
+                 :host (System/getenv "OPENSHIFT_INTERNAL_IP")
+                 }
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [ring "1.0.1" ;;; Exclude the clojure, clj-stacktrace from ring dependency
                    :exclusions [org.clojure/clojure
