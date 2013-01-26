@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clog - Login</title>
+     <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css"/>
+     <style type="text/css">
+         body {
+             padding-top: 80px;
+         }
+     </style> 
+</head>
+<body>
+ 
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <span><a class="brand"><b>Clog - The clojure Blog</b></a></span>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="span8">
+        <div id="error" class="alert alert-error">Error div</div>
+        <form class="form" method="POST" action="/login">
+            <div class="control-group">
+                <label class="control-label" for="username">Username</label>
+                <input type="text" id="username" name="username" class="input-xlarge"/>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="password">Password</label>
+                <input id="password" type="password" name="password" class="input-xlarge"/>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Login</button>
+                <a class="btn" href="/">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
