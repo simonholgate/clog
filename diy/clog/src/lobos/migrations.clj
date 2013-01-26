@@ -14,7 +14,7 @@
           core
           connectivity
           schema))
-  (:require [clojure.string :as string]
+  (:require [clojure.string :as str]
             [clojure.java.jdbc :as sql])
   (:import (java.net URI)))
 
