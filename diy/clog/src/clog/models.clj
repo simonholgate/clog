@@ -16,8 +16,7 @@
          :subname (if (= -1 (.getPort db-uri)) 
                     (format "//%s%s" (.getHost db-uri) (.getPath db-uri)) 
                     (format "//%s:%s%s" (.getHost db-uri) (.getPort 
-db-uri) (.getPath db-uri)))}) 
-)
+db-uri) (.getPath db-uri)))})
 
 ;; (comment connection info from http://www.leonardoborges.com/writings/2012/09/10/clojure-leiningen-heroku-aot-compilation-gotchas/ and env variables from http://www.jisaacks.com/setup-cakephp-app-on-heroku)
 ;; (def clogdb
