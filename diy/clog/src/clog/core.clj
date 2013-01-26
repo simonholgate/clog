@@ -37,8 +37,7 @@
   (run-jetty #'routes {:port port :join? false :host host}))
 
 (defn -main []
-  (let [mode (keyword (or (first m) :dev))
-        port (Integer/parseInt 
+  (let [port (Integer/parseInt 
               (or (System/getenv "OPENSHIFT_INTERNAL_PORT") "8080"))
         host (get (System/getenv) "OPENSHIFT_INTERNAL_IP")]
     (start port host)))
