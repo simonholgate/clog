@@ -3,7 +3,7 @@
           ")
 
 (ns lobos.populate
-  (:use 'clj-yaml.core))
+  (:use (clj-yaml [core])))
 
 
 (defn -main []
