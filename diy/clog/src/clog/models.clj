@@ -9,7 +9,7 @@
 
 (def user-and-password (string/split (.getUserInfo db-uri) #":")) 
 
-(def clogdb {:classname "org.postgresql.Driver" 
+(defdb clogdb {:classname "org.postgresql.Driver" 
          :subprotocol "postgresql" 
          :user (get user-and-password 0) 
          :password (get user-and-password 1) ; may be nil 
