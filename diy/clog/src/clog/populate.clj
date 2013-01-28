@@ -12,4 +12,5 @@
 (defn -main []
   (print "Populating database...") (flush)
   (insert authors (values (:authors (parse-string (slurp "./resources/fixtures.yml")))))
+(insert posts (values (:posts (parse-string (slurp "./resources/fixtures.yml")))))
   (println " done"))
